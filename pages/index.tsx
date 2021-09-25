@@ -12,10 +12,9 @@ const Home: NextPage = () => {
   const [showList, setShowList] = useState(false);
   const [displayList, setDisplayList] = useState(new Array);
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+  function handleClickItem (url: string) {
+    window.open(url, '_blank');
+  }
 
         <p className={styles.description}>
           Get started by editing{' '}
