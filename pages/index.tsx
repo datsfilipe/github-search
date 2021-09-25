@@ -20,28 +20,48 @@ const Home: NextPage = () => {
     setSearch(event.target.value)
   }
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+  async function handleSearch (event: FormEvent) {
+    event.preventDefault()
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+    const repoResults = await axios.get(`https://api.github.com/search/repositories?q=${search}`)
+    const userResults = await axios.get(`https://api.github.com/search/users?q=${search}`)
+    var searchList = new Array()
+    repoResults.data.items.forEach((e: typeof repoResults.data.items[1]) => {
+      const item = {
+        name: e.name, 
+        url: e.html_url
+      }
+      searchList.push(item)
+    })
+    userResults.data.items.forEach((e: typeof userResults.data.items[1]) => {
+      const item = {
+        login: e.login, 
+        url: e.html_url
+      }
+      searchList.push(item)
+    })
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+    var count = 1;
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
+    searchList.forEach((e) => {
+      const item = {
+        name: e.login || e.name,
+        url: e.url,
+        id: count
+      }
+      count ++;
+      displayList.push(item);
+      setDisplayList(displayList);
+    })
+
+    setShowList(true)
+  }
+
+  const handleClickAway = () => {
+    setShowList(false);
+    setDisplayList([])
+  }
+
           >
             <h2>Deploy &rarr;</h2>
             <p>
