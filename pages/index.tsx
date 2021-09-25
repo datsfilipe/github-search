@@ -62,28 +62,52 @@ const Home: NextPage = () => {
     setDisplayList([])
   }
 
+  return (
+    // ignoring cause it's the right way to use, but ts warns wrong anyway
+    // @ts-ignore
+    <RSC style={{ position: '', width: "75%", height: "60%" }}>{
+      <div className="container" >
+        <h2>GitHub Search</h2>
+        <p>the search prioritizes the repositories</p>
+        <ClickAwayListener
+            mouseEvent="onMouseDown"
+            touchEvent="onTouchStart"
+            onClickAway={handleClickAway}
           >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
+          <div id="clickable-content">
+            <form onSubmit={handleSearch}>
+              <button className="search-icon" type="submit" >
+                <Image src={githubImg} alt="GitHub" height="28" width="28"></Image>
+              </button>
+              <input
+                type="text"
+                value={search}
+                onChange={handleInputChange}
+              />
+            </form>
+            <div className={`${showList ? 'show' : ''} results`}>
+              <RSC>{
+                <ul>
+                  {displayList.map(item => {
+                    return (
+                      <li onClick={() => handleClickItem(item.url)} key={item.id}>
+                        {item.id}. {item.name}
+                      </li>
+                    )
+                  })}
+                </ul> 
+                } 
+              </RSC>
+            </div>
+          </div>
+        </ClickAwayListener>
+        <p>tip: for now, to research, click outside of clickable content</p>
+        <footer>
+        <a target="_blank" rel="noreferrer noopener" href="https://iconscout.com/icons/github">Github Icon</a> on <a target="_blank" rel="noreferrer noopener" href="https://iconscout.com">Iconscout</a>
+        </footer>
+      </div>
+    }
+    </RSC>
   )
 }
 
