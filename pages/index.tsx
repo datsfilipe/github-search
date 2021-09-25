@@ -1,7 +1,11 @@
+import axios from 'axios';
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { ClickAwayListener } from '@material-ui/core';
+import RSC from "react-scrollbars-custom";
+import githubImg from '../src/assets/github.svg'
+
 
 const Home: NextPage = () => {
   return (
