@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "add": "^2.0.6",
+    "axios": "^0.21.4",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-scrollbars-custom": "^4.0.27",
+    "yarn": "^1.22.11"
   },
   "devDependencies": {
     "@types/react": "17.0.24",
