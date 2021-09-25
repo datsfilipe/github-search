@@ -16,10 +16,9 @@ const Home: NextPage = () => {
     window.open(url, '_blank');
   }
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+  function handleInputChange (event: ChangeEvent<HTMLInputElement>) {
+    setSearch(event.target.value)
+  }
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
