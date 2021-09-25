@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { ClickAwayListener } from '@material-ui/core';
 import RSC from "react-scrollbars-custom";
-import githubImg from '../src/assets/github.svg'
+import githubImg from '../assets/github.svg'
 
 
 const Home: NextPage = () => {
