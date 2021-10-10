@@ -18,7 +18,7 @@ type ItemDisplayType = {
 
 const Home: NextPage = () => {
   const [search, setSearch] = useState('');
-  const [showList, setShowList] = useState(false);
+  const [show, setShow] = useState(false);
   const [displayList, setDisplayList] = useState(new Array);
 
   function handleClickItem (url: string) {
