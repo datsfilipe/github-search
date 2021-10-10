@@ -82,8 +82,11 @@ const Home: NextPage = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
-    setShowList(true)
-  }
+  useEffect(() => {
+    if(displayList.length > 1) {
+      setShow(true)
+    }
+  }, [displayList.length])
 
   const handleClickAway = () => {
     setShowList(false);
