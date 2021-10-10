@@ -9,6 +9,12 @@ import { ClickAwayListener } from '@material-ui/core';
 
 import githubImg from '../assets/github.svg'
 
+type ItemDisplayType = {
+  id: number;
+  name: string;
+  url: string;
+  isRepo: boolean;
+}
 
 const Home: NextPage = () => {
   const [search, setSearch] = useState('');
