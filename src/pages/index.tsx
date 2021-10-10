@@ -29,39 +29,58 @@ const Home: NextPage = () => {
     setSearch(event.target.value)
   }
 
-  async function handleSearch (event: FormEvent) {
-    event.preventDefault()
+  useEffect(() => {
+    if (search.length >= 2) {
+      const getSearch = async () => {
+        var searchList: ItemDisplayType[] = new Array()
+        let countRepo = 1
+        let countUser = 2
 
-    const repoResults = await axios.get(`https://api.github.com/search/repositories?q=${search}`)
-    const userResults = await axios.get(`https://api.github.com/search/users?q=${search}`)
-    var searchList = new Array()
-    repoResults.data.items.forEach((e: typeof repoResults.data.items[1]) => {
-      const item = {
+        const githubRepos = await axios.get(`https://api.github.com/search/repositories?q=${search}`)
+        const githubUsers = await axios.get(`https://api.github.com/search/users?q=${search}`)
+
+        githubRepos.data.items.forEach((e: typeof githubRepos.data.items[1]) => {
+          const item: ItemDisplayType = {
+            name: e.name, 
         name: e.name, 
-        url: e.html_url
-      }
-      searchList.push(item)
-    })
-    userResults.data.items.forEach((e: typeof userResults.data.items[1]) => {
-      const item = {
-        login: e.login, 
-        url: e.html_url
-      }
-      searchList.push(item)
-    })
+            name: e.name, 
+            url: e.html_url,
+            isRepo: true,
+            id: countRepo
+          }
+          searchList.push(item)
+          countRepo = countRepo + 2
+        })
 
-    var count = 1;
+        githubUsers.data.items.forEach((e: typeof githubUsers.data.items[1]) => {
+          const item: ItemDisplayType = {
+            name: e.login, 
+            url: e.html_url,
+            isRepo: false,
+            id: countUser
+          }
+          searchList.push(item)
+          countUser = countUser + 2
+        })
 
-    searchList.forEach((e) => {
-      const item = {
-        name: e.login || e.name,
-        url: e.url,
-        id: count
+        var searchListSorted: ItemDisplayType[] = [];
+
+        for (let i = 1; i <= 60; i++) {
+          searchList.forEach((e: ItemDisplayType) => {
+            if (e.id === i) {
+              searchListSorted.push(e)
+            }
+          })
+        }
+        setDisplayList(searchListSorted)
       }
-      count ++;
-      displayList.push(item);
-      setDisplayList(displayList);
-    })
+
+      getSearch()
+    } else {
+      setShow(false)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search])
 
     setShowList(true)
   }
