@@ -42,8 +42,6 @@ const Home: NextPage = () => {
         githubRepos.data.items.forEach((e: typeof githubRepos.data.items[1]) => {
           const item: ItemDisplayType = {
             name: e.name, 
-        name: e.name, 
-            name: e.name, 
             url: e.html_url,
             isRepo: true,
             id: countRepo
@@ -89,7 +87,7 @@ const Home: NextPage = () => {
   }, [displayList.length])
 
   const handleClickAway = () => {
-    setShowList(false);
+    setShow(false);
     setDisplayList([])
   }
 
@@ -99,7 +97,7 @@ const Home: NextPage = () => {
     <RSC style={{ position: '', width: "75%", height: "60%" }}>{
       <div className="container" >
         <h2>GitHub Search</h2>
-        <p>the search prioritizes the repositories</p>
+        <p>Search list style is: first repo, first user, in sequence...</p>
         <ClickAwayListener
             mouseEvent="onMouseDown"
             touchEvent="onTouchStart"
@@ -116,6 +114,7 @@ const Home: NextPage = () => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className={`${show ? 'show' : ''} results`}>
               <RSC>{
                 <ul>
                   {displayList.map(item => {
@@ -131,7 +130,7 @@ const Home: NextPage = () => {
             </div>
           </div>
         </ClickAwayListener>
-        <p>tip: for now, to research, click outside of clickable content</p>
+        <p>tip: for now, click on an item will redirect you to github link for it.</p>
         <footer>
         <a target="_blank" rel="noreferrer noopener" href="https://iconscout.com/icons/github">Github Icon</a> on <a target="_blank" rel="noreferrer noopener" href="https://iconscout.com">Iconscout</a>
         </footer>
