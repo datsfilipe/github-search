@@ -1,9 +1,12 @@
-import axios from 'axios';
 import type { NextPage } from 'next'
 import Image from 'next/image'
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { ClickAwayListener } from '@material-ui/core';
+
+import { ChangeEvent, useEffect, useState } from 'react';
+
+import axios from 'axios';
 import RSC from "react-scrollbars-custom";
+import { ClickAwayListener } from '@material-ui/core';
+
 import githubImg from '../assets/github.svg'
 
 
