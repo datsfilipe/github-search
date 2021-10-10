@@ -106,7 +106,7 @@ const Home: NextPage = () => {
             onClickAway={handleClickAway}
           >
           <div id="clickable-content">
-            <form onSubmit={handleSearch}>
+            <div className="input">
               <button className="search-icon" type="submit" >
                 <Image src={githubImg} alt="GitHub" height="28" width="28"></Image>
               </button>
@@ -115,8 +115,7 @@ const Home: NextPage = () => {
                 value={search}
                 onChange={handleInputChange}
               />
-            </form>
-            <div className={`${showList ? 'show' : ''} results`}>
+            </div>
               <RSC>{
                 <ul>
                   {displayList.map(item => {
