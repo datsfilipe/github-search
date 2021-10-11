@@ -104,7 +104,7 @@ const Home: NextPage = () => {
           <div id="clickable-content">
             <div className="input">
               <button className="search-icon" type="submit" >
-                <Image src="https://raw.githubusercontent.com/datsfilipe/github-search/main/src/assets/github.svg" alt="GitHub" height="28" width="28"></Image>
+                <Image src="https://raw.githubusercontent.com/datsfilipe/github-search/main/src/assets/images/github.svg" alt="GitHub" height="28" width="28"></Image>
               </button>
               <input
                 type="text"
