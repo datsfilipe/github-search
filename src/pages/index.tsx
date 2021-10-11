@@ -7,8 +7,6 @@ import axios from 'axios';
 import RSC from "react-scrollbars-custom";
 import { ClickAwayListener } from '@material-ui/core';
 
-import githubImg from '../assets/github.svg'
-
 type ItemDisplayType = {
   id: number;
   name: string;
@@ -106,7 +104,7 @@ const Home: NextPage = () => {
           <div id="clickable-content">
             <div className="input">
               <button className="search-icon" type="submit" >
-                <Image src={githubImg} alt="GitHub" height="28" width="28"></Image>
+                <Image src="https://raw.githubusercontent.com/datsfilipe/github-search/main/src/assets/github.svg" alt="GitHub" height="28" width="28"></Image>
               </button>
               <input
                 type="text"
