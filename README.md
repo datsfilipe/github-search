@@ -14,9 +14,7 @@ Github Search
   </a>
 </p>
 
-<hr>
-
-## Screenshot
+<h2 align="center">Screenshot</h2>
 
 <p align="center">
   <img src="./screenshot.png" width="800" />
@@ -46,4 +44,3 @@ Github Search
 <!-- ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests. -->
-
