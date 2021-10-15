@@ -1,8 +1,20 @@
-<h1 align="center">GitHub Search</h1>
+<h1 align="center">
+Github Search
+</h1>
 
-## Description
+<p align="center">Search users and repositories from github with a beautiful and minimalist interface.</p>
+<p align="center">Deployed <a href="http://github-search-mu.vercel.app/">here</a>.</p>
 
-Search users and repositories from github with a beautiful and minimalist interface. 
+<p align="center">
+  <a href="https://github.com/datsfilipe/github-search/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/datsfilipe/github-search?color=%237159c1&logoColor=%237159c1&style=flat" alt="Contributors">
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/github/license/datsfilipe/github-search?color=%237159c1&logo=mit" alt="License">
+  </a>
+</p>
+
+<hr>
 
 ## Screenshot
 
@@ -10,40 +22,28 @@ Search users and repositories from github with a beautiful and minimalist interf
   <img src="./screenshot.png" width="800" />
 </p>
 
-## Technologies
+<hr>
 
-1. Next
-2. React
-3. Typescript
+## Project by
 
-### Cool Dependencies
+| [<img src="https://avatars.githubusercontent.com/u/76636791?s=400&u=cbb8a8f38347a64658aee5ba0e93210b713765cc&v=4" width="75px;"/>](https://github.com/datsfilipe) |
+| :------------------------------------------------------------------------------------------------------------------------: |
 
-1. Axios
-2. React-scrollbars-custom
-3. @material-ui/core
 
-## Running project
+| [Filipe Lima](https://github.com/datsfilipe)
 
-<p align="justify">I used yarn for the entire project, but you can use npm, just search how to use it.</p>
+## Techs
 
-```bash
-# Clone the git repository
-$ git clone https://github.com/datsfilipe/github-search.git
+- [x] Next.js
+- [x] React.js
+- [x] TypeScript
 
-# Enter the folder created by git clone
-$ cd github-search
+## Usage
 
-# Install dependencies with yarn
-$ yarn
+1. Run `npm install` or `yarn install`.<br />
+2. Run `yarn dev` and access `http://localhost:3000`.<br />
 
-# Run app in development mode
-$ yarn dev
+<!-- ## Contributing
 
-# Server will be listening on port 3000
-```
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests. -->
 
-### Next.js Project
-
-This is a [Next.js](https://nextjs.org/) project, created using ``yarn create next-app --typescript``!
-
-Deployment [here](http://github-search-mu.vercel.app/).
