@@ -6,6 +6,8 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 import RSC from "react-scrollbars-custom";
 import { ClickAwayListener } from '@material-ui/core';
+import { Toaster, toast } from 'react-hot-toast'
+import styles from '../styles/styles.module.scss';
 
 import githubImg from '../assets/images/github.svg';
 
@@ -14,6 +16,20 @@ type ItemDisplayType = {
   name: string;
   url: string;
   isRepo: boolean;
+}
+
+type GithubRepoType = {
+  data: {
+    items: {name: string;
+      html_url: string;}[];
+  }
+}
+
+type GithubUserType = {
+  data: {
+    items: {login: string;
+      html_url: string;}[];
+  }
 }
 
 const Home: NextPage = () => {
@@ -36,30 +52,38 @@ const Home: NextPage = () => {
         let countRepo = 1
         let countUser = 2
 
-        const githubRepos = await axios.get(`https://api.github.com/search/repositories?q=${search}`)
-        const githubUsers = await axios.get(`https://api.github.com/search/users?q=${search}`)
-
-        githubRepos.data.items.forEach((e: typeof githubRepos.data.items[1]) => {
-          const item: ItemDisplayType = {
-            name: e.name, 
-            url: e.html_url,
-            isRepo: true,
-            id: countRepo
-          }
-          searchList.push(item)
-          countRepo = countRepo + 2
+        const githubRepos: GithubRepoType | void = await axios.get(`https://api.github.com/search/repositories?q=${search}`).catch(err => {
+          toast.error(err.message)
+        })
+        const githubUsers: GithubUserType | void = await axios.get(`https://api.github.com/search/users?q=${search}`).catch(err => {
+          toast.error(err.message)
         })
 
-        githubUsers.data.items.forEach((e: typeof githubUsers.data.items[1]) => {
-          const item: ItemDisplayType = {
-            name: e.login, 
-            url: e.html_url,
-            isRepo: false,
-            id: countUser
-          }
-          searchList.push(item)
-          countUser = countUser + 2
-        })
+        if (githubRepos) {
+          githubRepos.data.items.forEach((e: typeof githubRepos.data.items[1]) => {
+            const item: ItemDisplayType = {
+              name: e.name, 
+              url: e.html_url,
+              isRepo: true,
+              id: countRepo
+            }
+            searchList.push(item)
+            countRepo = countRepo + 2
+          })
+        }
+
+        if (githubUsers) {
+          githubUsers.data.items.forEach((e: typeof githubUsers.data.items[1]) => {
+            const item: ItemDisplayType = {
+              name: e.login, 
+              url: e.html_url,
+              isRepo: false,
+              id: countUser
+            }
+            searchList.push(item)
+            countUser = countUser + 2
+          })
+        }
 
         var searchListSorted: ItemDisplayType[] = [];
 
@@ -72,7 +96,6 @@ const Home: NextPage = () => {
         }
         setDisplayList(searchListSorted)
       }
-
       getSearch()
     } else {
       setShow(false)
@@ -95,45 +118,45 @@ const Home: NextPage = () => {
     // ignoring cause it's the right way to use, but ts warns wrong anyway
     // @ts-ignore
     <RSC style={{ position: '', width: "75%", height: "60%" }}>{
-      <div className="container" >
-        <h2>GitHub Search</h2>
-        <p>Search list style is: first repo, first user, in sequence...</p>
+      <div className={styles.container} >
+        <Toaster/>
+        <h2 className={styles.headerText}>GitHub Search</h2>
+        <p className={styles.subtext}>Search list style is: first repo, first user, in sequence...</p>
         <ClickAwayListener
             mouseEvent="onMouseDown"
             touchEvent="onTouchStart"
             onClickAway={handleClickAway}
           >
-          <div id="clickable-content">
-            <div className="input">
-              <button className="search-icon" type="submit" >
+          <div>
+            <div className={`${show ? styles.hasBottomContent : ''}  ${styles.search}`}>
+              <button className={`${styles.searchIcon} ${styles.button}`} type="submit" >
                 <Image src={githubImg} alt="GitHub" height="28" width="28"></Image>
               </button>
               <input
+                className={styles.input}
+                autoComplete="off"
                 type="text"
                 value={search}
                 onChange={handleInputChange}
               />
-            </div>
-            <div className={`${show ? 'show' : ''} results`}>
-              <RSC>{
-                <ul>
-                  {displayList.map(item => {
-                    return (
-                      <li onClick={() => handleClickItem(item.url)} key={item.id}>
-                        {item.id}. {item.name}
-                      </li>
-                    )
-                  })}
-                </ul> 
-                } 
-              </RSC>
+              <div className={`${show ? styles.show : ''}  ${styles.results}`}>
+                <RSC>{
+                  <ul className={styles.listContainer}>
+                    {displayList.map(item => {
+                      return (
+                        <li className={styles.listItem} onClick={() => handleClickItem(item.url)} key={item.id}>
+                          <p className={styles.itemId}>{item.id}.</p>
+                          <p className={styles.itemName}>{item.name}</p>
+                        </li>
+                      )
+                    })}
+                  </ul> 
+                }
+                </RSC>
+              </div>
             </div>
           </div>
         </ClickAwayListener>
-        <p>tip: for now, click on an item will redirect you to github link for it.</p>
-        <footer>
-        <a target="_blank" rel="noreferrer noopener" href="https://iconscout.com/icons/github">Github Icon</a> on <a target="_blank" rel="noreferrer noopener" href="https://iconscout.com">Iconscout</a>
-        </footer>
       </div>
     }
     </RSC>
