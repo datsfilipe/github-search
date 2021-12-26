@@ -42,13 +42,10 @@
   border-radius: 12px 0 0 12px;
   border: none;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.5px);
-  -webkit-backdrop-filter: blur(8.5px);
+  background: rgba(255, 255, 255, 0.7);
   transition: all 120ms ease-in-out;
   &:hover {
-    filter: brightness(0.8);
+    filter: brightness(0.9);
   }
 }
 
@@ -82,59 +79,7 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(8.5px);
-  border: 1px solid rgba(255, 255, 255, 0.32);
-}
-
-.listContainer {
-  position: relative;
-  padding: 0;
-  margin: 0;
-  background: transparent;
-}
-
-.listItem {
-  display: flex;
-  height: 45px;
-  position: relative;
-}
-
-.itemId {
-  margin: auto 0;
-  height: 55px;
-  width: 55px;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.itemName {
-  cursor: pointer;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.5px);
-  -webkit-backdrop-filter: blur(5.5px);
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  margin: auto 0;
-  height: 25px;
-  padding: 3px 10px;
-  left: 70px;
-  right: 10px;
-  top: 0;
-  bottom: 0;
-  position: absolute;
-  white-space: nowrap;
-  overflow: hidden;
-  transition: all 200ms ease-in-out;
-  text-overflow: ellipsis;
-
-  &:hover {
-    padding: 5px 12px;
-  }
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .show {
