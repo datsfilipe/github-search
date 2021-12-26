@@ -113,6 +113,9 @@ const Home: NextPage = () => {
     setShow(false);
     setDisplayList([])
   }
+  
+  // debounce with useMemo hook instead of useCallback hook
+  const debounceSearch = useMemo(() => debounce(searchValue => handleSearch(searchValue), 500), [])
 
   return (
     // ignoring cause it's the right way to use, but ts warns wrong anyway
