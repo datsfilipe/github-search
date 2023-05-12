@@ -1,61 +1,71 @@
-import axios from 'axios'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { User, Repository, Result } from '../types'
 
+type Result = User | Repository
+
+type GhUser = {
+  items: User[]
+}
+
+type GhRepository = {
+  items: Repository[]
+}
+
+const getUsers = async (search: string) => {
+  const response = (await fetch(`https://api.github.com/search/users?q=${search}`)).json() as Promise<GhUser>
+
+  return (await response).items.map((user) => ({
+    id: user.id,
+    name: user.login,
+    html_url: user.html_url,
+  }))
+}
+
+const getRepos = async (search: string) => {
+  const response = (await fetch(`https://api.github.com/search/repositories?q=${search}`)).json() as Promise<GhRepository>
+
+  return (await response).items.map((repo) => ({
+    id: repo.id,
+    name: repo.name,
+    html_url: repo.html_url,
+  }))
+}
 
 export function useSearch () {
   const [results, setResults] = useState<Result[]>([])
-  const [show, setShow] = useState(false);
-
-  // this will return our results array in that format:
-  // { repo, user, repo, user, repo, ... }
-  const shuffleArray = (array: Result[]) => {
-    let newArray = []
-    let count = (array.length / 2)
-
-    for (let i = 0; i < array.length; i ++) {
-      if ((i % 2) != 0) {
-        newArray[i] = array[i] // if it's not pair
-      } else {
-        newArray[i] = array[count] // if it's pair
-        newArray[count] = array[i]
-        count ++
-      }
-    }
-    
-    return newArray;
-  }
 
   const handleSearch = async (search: string) => {
+    if (!search) {
+      setResults([])
+      return
+    }
+
     try {
-      let newResults: Result[] = []
+      const users = await getUsers(search)
+      const repos = await getRepos(search)
 
-      newResults = [...newResults, ...((await axios.get(`https://api.github.com/search/users?q=${search}`)).data.items.map((item: User) => {
-        return {
-          id: item.id,
-          name: item.login,
-          url: item.html_url,
-          isRepo: false
+      // sort by aprox. with search term
+      setResults([...users, ...repos].sort((a, b) => {
+        const aName = a.name.toLowerCase()
+        const bName = b.name.toLowerCase()
+        const searchName = search.toLowerCase()
+
+        if (aName.includes(searchName) && bName.includes(searchName)) {
+          return aName.length - bName.length
         }
-      }))]
 
-      newResults = [...newResults, ...((await axios.get(`https://api.github.com/search/repositories?q=${search}`)).data.items.map((item: Repository) => {
-        return {
-          id: item.id,
-          name: item.name,
-          url: item.html_url,
-          isRepo: true
+        if (aName.includes(searchName)) {
+          return -1
         }
-      }))]
 
-      setResults(shuffleArray(newResults))
+        if (bName.includes(searchName)) {
+          return 1
+        }
 
-      setShow(true)
-    } catch(err: any) {
-      setShow(false)
-
-      toast.error(err.message, {
+        return 0
+      }))
+    } catch (err) {
+      toast.error('An error occurred while searching for users and repositories.', {
         style: {
           background: '#171717',
           color: '#e6e6e6',
@@ -67,7 +77,10 @@ export function useSearch () {
     }
   }
 
-  const value = { handleSearch, results, show, setShow }
+  const value = {
+    results,
+    handleSearch
+  }
 
   return value
 }
