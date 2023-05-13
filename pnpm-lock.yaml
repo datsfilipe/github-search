@@ -4,6 +4,9 @@ dependencies:
   '@unocss/reset':
     specifier: ^0.51.12
     version: 0.51.12
+  '@vercel/ncc':
+    specifier: ^0.36.1
+    version: 0.36.1
   node-fetch:
     specifier: ^3.3.1
     version: 3.3.1
@@ -2189,6 +2192,11 @@ packages:
     transitivePeerDependencies:
       - rollup
     dev: true
+
+  /@vercel/ncc@0.36.1:
+    resolution: {integrity: sha512-S4cL7Taa9yb5qbv+6wLgiKVZ03Qfkc4jGRuiUQMQ8HGBD5pcNRnHeYM33zBvJE4/zJGjJJ8GScB+WmTsn9mORw==}
+    hasBin: true
+    dev: false
 
   /@vitejs/plugin-react-swc@3.3.1(vite@4.3.5):
     resolution: {integrity: sha512-ZoYjGxMniXP7X+5ry/W1tpY7w0OeLUEsBF5RHFPmAhpgwwNWie8OF4056MRXRi9QgvYYoZPDzdOXGK3wlCoTfQ==}
