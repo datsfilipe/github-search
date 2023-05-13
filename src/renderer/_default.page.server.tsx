@@ -17,8 +17,8 @@ async function render(pageContext: PageContextServer) {
   )
 
   const { documentProps } = pageContext.exports
-  const title = (documentProps && documentProps.title) || 'Vite SSR app'
-  const desc = (documentProps && documentProps.description) || 'App using Vite + vite-plugin-ssr'
+  const title = (documentProps && documentProps.title) || 'GitHub Search'
+  const desc = (documentProps && documentProps.description) || 'Search in GitHub'
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">
@@ -29,6 +29,7 @@ async function render(pageContext: PageContextServer) {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${desc}" />
+        <link rel="icon" href="/GHS.svg" type="image/svg+xml" />
         <title>${title}</title>
 
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
