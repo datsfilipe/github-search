@@ -11,7 +11,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "echo 'I will never be called because the `vercel-build` script supersedes me'",
+    "vercel-build": "vite build",
     "start": "vite preview"
   },
   "dependencies": {
