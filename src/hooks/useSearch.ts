@@ -65,15 +65,7 @@ export function useSearch () {
         return 0
       }))
     } catch (err) {
-      toast.error('An error occurred while searching for users and repositories.', {
-        style: {
-          background: '#171717',
-          color: '#e6e6e6',
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          borderColor: 'rgba(255,255,255,0.06)'
-        }
-      })
+      toast.error('An error occurred while searching for users and repositories.')
     }
   }
 
