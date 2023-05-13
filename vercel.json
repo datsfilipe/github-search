@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/((?!assets/).*)",
-      "destination": "/api/ssr.js"
+      "source": "/src/((?!assets/).*)",
+      "destination": "/src/api/ssr.js"
     }
   ]
 }
