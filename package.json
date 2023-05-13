@@ -11,12 +11,13 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "echo 'I will never be called because the `vercel-build` script supersedes me'",
-    "vercel-build": "vite build",
-    "start": "vite preview"
+    "start": "vite preview",
+    "build": "vite build",
+    "vercel-build": "./vercel/build.sh"
   },
   "dependencies": {
     "@unocss/reset": "^0.51.12",
+    "@vercel/ncc": "^0.36.1",
     "node-fetch": "^3.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -2,6 +2,7 @@ import { renderPage } from 'vite-plugin-ssr'
 
 export default async function handler(req, res) {
   const { url } = req
+
   console.log('Request to url:', url)
 
   const pageContextInit = { url }
@@ -11,11 +12,11 @@ export default async function handler(req, res) {
   if (!httpResponse) {
     res.statusCode = 200
     res.end()
-    return
-  }
+  } else {
+    const { body, statusCode, contentType } = httpResponse
 
-  const { body, statusCode, contentType } = httpResponse
-  res.statusCode = statusCode
-  res.setHeader('content-type', contentType)
-  res.end(body)
+    res.statusCode = statusCode
+    res.setHeader('content-type', contentType)
+    res.end(body)
+  }
 }
