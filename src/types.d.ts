@@ -27,3 +27,8 @@ declare type GhUser = {
   following: number
   created_at: string
 }
+
+declare module '*.svg' {
+  const src: string
+  export default src
+}
