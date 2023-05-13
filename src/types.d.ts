@@ -10,8 +10,20 @@ declare type User = {
   html_url: string;
 }
 
-// declare scss modules for typescript
-declare module '*module.scss' {
-  const content: { [className: string]: string }
-  export default content
+declare type GhUser = {
+  login: string
+  id: number
+  avatar_url: string
+  html_url: string
+  repos_url: string
+  name: string
+  company: string
+  location: string
+  email: string
+  hireable: boolean
+  twitter_username: string
+  public_repos: number
+  followers: number
+  following: number
+  created_at: string
 }
